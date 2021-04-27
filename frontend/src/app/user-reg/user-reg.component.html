@@ -1,0 +1,182 @@
+<app-navigation-bar></app-navigation-bar>
+<form class="registration-form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="container register">
+        <div class="row">
+            
+            <div class="col-md-3 register-left">
+                <img src="assets/images/heart_medical.png" alt=""/>  
+                
+                <p style="font-size:22px; font-style: oblique;"><b>Welcome!!</b></p>
+                <p style="font-size:22px; font-style: italic; padding:2%"><b>You are 30 seconds away from saving a life!</b></p>
+            </div>
+
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" ifade show actived="home" role="tabpanel" aria-labelledby="home-tab">
+                        <p class="register-heading" style="font-size:26px;"><b>Organ Donation Registraion</b></p>
+                        <div class="row register-form">
+                            
+                            <div class="col-md-6">
+                                <p style="font-size:17px; padding-bottom: 2%;"><b>Primary User</b></p>
+                                <div class="form-group mb-3  mt-n1" >
+                                    <input type="text" pattern="[a-zA-Z0-9]*" class="form-control" name="firstName" id="firstName" placeholder="First Name *" value="" required formControlName="firstName"/>
+                                    <div *ngIf = "f.firstName.touched && f.firstName.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.firstName.errors?.required">First name is required</div>
+                                    </div>
+                                </div>
+                            
+                                <div class="form-group mb-3  mt-n1">
+                                    <input type="text" pattern="[a-zA-Z0-9]*" class="form-control" name="lastName" id="lastName" placeholder="Last Name *" value="" formControlName="lastName"/>
+                                    <div *ngIf = "f.lastName.touched && f.lastName.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.lastName.errors?.required">Last name is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3  mt-n1">
+                                    <input type="email" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" class="form-control" name="email" id="email" placeholder="Email *" value="" formControlName="email"/>
+                                    <div *ngIf = "f.email.touched && f.email.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.email.errors?.required">Email is required</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3 mt-n1 was-validated">
+                                    <div class="input-group has-validation">
+                                       <span class="input-group-text" id="inputGroupPrepend3">+91</span>
+                                       <input type="tel" pattern="[789][0-9]{9}" class="form-control" id="phone" name="phone" placeholder="Phone number*"  value="" required formControlName="phone" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3 mt-n1">
+                                    <input type="text" class="form-control" pattern="^[2-9]{1}[0-9]{3}-[0-9]{4}-[0-9]{4}$"  name="aadhar" id="aadhar" placeholder="Aadhar Number*" value="" formControlName="aadhar"/>
+                                    <div *ngIf = "f.aadhar.touched && f.aadhar.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.aadhar.errors?.required">Aadhar number is required</div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="form-group mb-3 mt-n1">
+                                    <input type="number" class="form-control"  name="age" id="age" min="20" max="100" placeholder="Age" value="" formControlName="age"/>
+                                    <div *ngIf = "f.age.touched && f.age.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.age.errors?.required">Age is required</div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group mb-3 mt-n1">
+                                    <input type="text" class="form-control" pattern="(A|B|AB|O)[+-]" name="bloodGroup" id="bloodGroup" placeholder="Blood Group*" value="" formControlName="bloodGroup"/>
+                                    <div *ngIf = "f.bloodGroup.touched && f.bloodGroup.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.bloodGroup.errors?.required">Age is required</div>
+                                    </div>
+                                </div>-->
+                                
+                                <div class=" form-group mb-3 mt-n1">
+                                    <div style="align-self: center; margin-top: 0.5cm;">
+                                        <p style="font-size:17px;" > <b>Choose your blood Group</b></p>
+                                        <select name="hospitals" id="bloodGroup" formControlName="bloodGroup">
+                                            <option style="height: 20px;" *ngFor="let bloodGroupVal of bloodGroups" [value]="bloodGroupVal.value">{{bloodGroupVal.viewValue}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="px-2 mb-3 mt-n1 ml-10" style="margin-top: 1cm;">
+                                    <fieldset id="group1">
+                                        <input class="ml-10 px-5" type="radio" value="Male" name="gender" id="Male" formControlName="gender"> <span class="px-2"> Male </span>
+                                        <input class="ml-10 px-5" type="radio" value="Female" name="gender" id="Female" formControlName="gender"> <span class="px-2"> Female </span>
+                                    </fieldset>
+                                </div>
+
+                                <!-- PASSWORD AND CONFIRM PASSWORD FIELDS -->
+                                <div class="form-group mb-3 mt-n1">
+                                    <label style="font-size:16px;" for="password"><b>Password</b></label>
+                                    <input formControlName="password" id="password" type="password" class="form-control"  name="password" 
+                                    value="" />
+                                    <div *ngIf = "f.password.touched && f.password.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.password.errors?.required">Password is required</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group mb-3 mt-n1">
+                                    <label style="font-size:16px;" for="confirm_password"><b>Confirm Password</b></label>
+                                    <input formControlName="confirm_password" id="confirm_password" type="password" class="form-control"  
+                                    name="confirm_password" value="" />
+
+                                    <div *ngIf = "f.confirm_password.touched && f.confirm_password.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.confirm_password.errors?.required">Confirm Password is required</div>
+                                        <div *ngIf="f.confirm_password.errors?.confirmedValidator">Password and confirm password must match.</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <p style="font-size:17px; padding-bottom: 2%;"><b>Secondary User</b></p>
+                                <div class="form-group mb-3  mt-n1">
+                                    <input type="text" class="form-control" pattern="[a-zA-Z0-9]*" name="secondary_first_name" id="secondary_first_name" placeholder="Secondary User First Name *" value="" formControlName="secondary_first_name"/>
+                                    <div *ngIf = "f.secondary_first_name.touched && f.secondary_first_name.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.secondary_first_name.errors?.required">First name is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3  mt-n1">
+                                    <input type="text" class="form-control" pattern="[a-zA-Z0-9]*" name="secondary_last_name" id="secondary_last_name" placeholder="Secondary User Last Name *" value="" formControlName="secondary_last_name"/>
+                                    <div *ngIf = "f.secondary_last_name.touched && f.secondary_last_name.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.secondary_last_name.errors?.required">Last name is required</div>
+                                    </div>
+                                </div>
+                                                  
+                                <div class="form-group mb-3  mt-n1">
+                                    <input type="email" class="form-control" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" name="secondary_email" id="secondary_email" placeholder="Email *" value="" formControlName="secondary_email"/>
+                                    <div *ngIf = "f.secondary_email.touched && f.secondary_email.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.secondary_email.errors?.required">Email is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 mt-n1 was-validated">
+                                    
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="inputGroupPrepend3">+91</span>
+                                        <input type="tel" pattern="[789][0-9]{9}" class="form-control" name="secondary_phone" id="secondary_phone" placeholder="Phone number*"  value="" required formControlName="secondary_phone"/>
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 mt-n1">
+                                    <input type="text" class="form-control" pattern="^[2-9]{1}[0-9]{3}-[0-9]{4}-[0-9]{4}$" name="secondary_aadhar" id="secondary_aadhar" placeholder="Aadhar Number*" value="" formControlName="secondary_aadhar"/>
+                                    <div *ngIf = "f.secondary_aadhar.touched && f.secondary_aadhar.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.secondary_aadhar.errors?.required">Aadhar number is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3 mt-n1">
+                                    <input type="text" class="form-control" name="secondary_relationship" id="secondary_relationship" placeholder="Relationship with primary user*" value="" formControlName="secondary_relationship"/>
+                                    <div *ngIf = "f.secondary_relationship.touched && f.secondary_relationship.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.secondary_relationship.errors?.required">Relationship with donar is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                                    
+                            <h2 style="margin-top: 1cm"><b>Terms and Conditions</b></h2>
+                            <h4>
+                                By submitting this registration I affirm I am the person described on this application, 
+                                and the information entered herein is true and correct to the best of my knowledge. 
+                                This registration will serve as a document of gift as outlined in the Indian Unified Anatomy Act. 
+                                As per this act: friend, live-in partner and a nominated person in the provisions of the Act 
+                                to enable them to give consent for body donation.   
+                            </h4>
+                            <div>
+                                <input class="form-check-input" style="margin-right: 0.25cm" type="checkbox" value="" id="accept_terms" formControlName="termsConditionsCheckbox">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Yes, I accept the Terms and Conditions.
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary register_button" [disabled]="!form.valid">
+                                proceed to next page
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
