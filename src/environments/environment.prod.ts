@@ -15,7 +15,7 @@ export const environment = {
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
-export const baseUrl = `http://192.168.1.4:9098/api/`; 
+export const baseUrl = `http://192.168.0.101:9098/api/`; 
 
 //export const baseUrl = `http://localhost:9098/api/`;
 
